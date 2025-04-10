@@ -79,8 +79,9 @@ The Quadball Canada Registration & Events Platform is a web application designed
 
 5. **Run the development server:**
    ```bash
-   pnpm dev
+   npx sst dev
    ```
+   Note: `pnpm dev` does not work for local development.
    Access the app at http://localhost:3000
 
 ## Deployment
