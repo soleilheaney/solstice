@@ -1,74 +1,154 @@
-# [React TanStarter](https://github.com/dotnize/react-tanstarter)
+# Quadball Canada Registration & Events Platform
 
-A minimal starter template for 🏝️ TanStack Start.
+## Overview and Purpose
 
-- [React 19](https://react.dev) + [React Compiler](https://react.dev/learn/react-compiler)
-- TanStack [Start](https://tanstack.com/start/latest) + [Router](https://tanstack.com/router/latest) + [Query](https://tanstack.com/query/latest)
-- [Tailwind CSS v4](https://tailwindcss.com/) + [shadcn/ui](https://ui.shadcn.com/)
-- [Drizzle ORM](https://orm.drizzle.team/) + PostgreSQL
-- [Better Auth](https://www.better-auth.com/)
+The Quadball Canada Registration & Events Platform is a web application designed to streamline sports league management – initially serving **Quadball Canada** (the national quadball governing body) and eventually adaptable to other sports organizations. The platform enables athletes, team leaders, and administrators to handle all essential activities in one place.
 
-## Getting Started
+**Key Features:**
 
-1. [Use this template](https://github.com/new?template_name=react-tanstarter&template_owner=dotnize) or clone this repository.
+- **Member Registration & Management:** User accounts, profiles, waivers, and annual memberships
+- **Team Setup & Roster Management:** Team creation, player invitations, and roster management
+- **Event Creation & Registration:** Tournament/league management with team/individual registration
+- **Payments & Finance:** Integration with Stripe for membership and event fees
+- **Role-Based Access Control:** Admin, Team Lead, and Player permission layers
+- **Communication & Notifications:** Email confirmations and announcements
+- **Future Extensibility:** Multi-organization, multi-sport capability
 
-2. Install dependencies:
+## Tech Stack and Architecture
 
+- **TanStack Start (React framework):** Type-safe React framework with file-based routing and SSR
+- **AWS Lambda via SST (Serverless Stack):** Serverless deployment with infrastructure as code
+- **Drizzle ORM + PostgreSQL:** Type-safe database client with PostgreSQL
+- **Authentication Provider (Better Auth):** Authentication handling with multiple providers
+- **UI and Frontend Libraries:** Tailwind CSS v4 with shadcn/ui components
+- **React 19 + React Compiler:** Latest React features and optimizations
+- **TanStack Router + Query:** Type-safe routing and data fetching
+
+## Project Structure
+
+- `src/` – TanStack Start application
+  - `routes/` – Page and API route components with file-based routing
+  - `components/` – Reusable UI components
+  - `lib/` – Utility functions, server code, and auth
+- `drizzle/` – Database schema and migrations
+- `sst.config.ts` – SST configuration and AWS resource definitions
+
+## Local Development Setup
+
+### Prerequisites
+
+- Node.js (>=18) and npm/pnpm
+- PostgreSQL 17 (for local development)
+- AWS CLI configured (for deployment)
+
+### Setup Steps
+
+1. **Clone the repository:**
    ```bash
-   pnpm install # npm install
+   git clone https://github.com/your-org/quadball-platform.git
+   cd quadball-platform
    ```
 
-3. Create a `.env` file based on [`.env.example`](./.env.example).
-
-4. Push the schema to your database with drizzle-kit:
-
+2. **Install dependencies:**
    ```bash
-   pnpm db push # npm run db push
+   pnpm install
    ```
 
-   https://orm.drizzle.team/docs/migrations
-
-5. Run the development server:
-
+3. **Set up PostgreSQL database:**
    ```bash
-   pnpm dev # npm run dev
+   # Install PostgreSQL (if not already installed)
+   brew install postgresql@17
+   
+   # Start PostgreSQL service
+   brew services start postgresql@17
+   
+   # Create database user and set password
+   createuser -s postgres
+   psql -c "ALTER USER postgres WITH PASSWORD 'postgres';" postgres
+   
+   # Create the application database
+   createdb -U postgres solstice
    ```
 
-   The development server should be now running at [http://localhost:3000](http://localhost:3000).
+4. **Configure AWS credentials and region**
+   ```bash
+   aws configure sso
+   ```
+   Or include manual credentials in `~/.aws/credentials` file
+   Either way, use profile soleil-dev
 
-## Issue watchlist
+5. **Run the development server:**
+   ```bash
+   pnpm dev
+   ```
+   Access the app at http://localhost:3000
 
-- [React Compiler docs](https://react.dev/learn/react-compiler), [Working Group](https://github.com/reactwg/react-compiler/discussions) - React Compiler is still in beta. You can disable it in [app.config.ts](./app.config.ts#L15) if you prefer.
-- https://github.com/TanStack/router/discussions/2863 - TanStack Start is currently in beta and may still undergo major changes.
+## Deployment
 
-## Auth
+Deploying to AWS is done via SST:
 
-Better Auth is currently configured for OAuth with GitHub, Google, and Discord, but can be easily modified to use other providers.
+1. **Configure AWS credentials and region**
+2. **Deploy with SST:**
+   ```bash
+   AWS_PROFILE=soleil-dev npx sst deploy --stage dev
+   ```
 
-If you want to use email/password authentication or change providers, update the [auth config](./src/lib/server/auth.ts#L36) and [signin page](./src/routes/signin.tsx) with your own UI. You can use [shadcn/ui login blocks](https://ui.shadcn.com/blocks/login) as a starting point.
+## Implementation Plan
 
-## Goodies
+The project is divided into six phases, each with specific goals:
 
-#### Scripts
+1. **Foundation Setup & User Authentication** - Basic infrastructure and auth flows
+2. **Member Profiles & Membership Management** - User profiles and membership purchases
+3. **Team Management** - Team creation and roster management
+4. **Event Management & Registration** - Event creation and registration
+5. **Communication & Advanced Features** - Dashboards, notifications, and UI polish
+6. **Multi-Organization & Scalability** - Support for multiple organizations
 
-These scripts in [package.json](./package.json#L5) use **pnpm** by default, but you can modify them to use your preferred package manager.
+Detailed tickets for each phase are available in the `tickets/` directory.
 
-- **`auth:generate`** - Regenerate the [auth db schema](./src/lib/server/schema/auth.schema.ts) if you've made changes to your Better Auth [config](./src/lib/server/auth.ts).
-- **`db`** - Run drizzle-kit commands. (e.g. `pnpm db generate` to generate a migration)
-- **`ui`** - The shadcn/ui CLI. (e.g. `pnpm ui add button` to add the button component)
-- **`format`** and **`lint`** - Run Prettier and ESLint.
-- **`deps`** - Selectively upgrade dependencies via npm-check-updates.
+## Important Libraries and Documentation
 
-#### Utilities
+This project uses several cutting-edge libraries that are relatively new:
 
-- [`auth-guard.ts`](./src/lib/middleware/auth-guard.ts) - Sample middleware for forcing authentication on server functions. ([see #5](https://github.com/dotnize/react-tanstarter/issues/5))
-- [`ThemeToggle.tsx`](./src/lib/components/ThemeToggle.tsx) - A simple component to toggle between light and dark mode. ([#7](https://github.com/dotnize/react-tanstarter/issues/7))
+1. **TanStack Start (v1.115+)**: 
+   - Documentation: https://tanstack.com/start/latest/docs/framework/react/overview
+   - Changes to beta: https://github.com/TanStack/router/discussions/2863 
+   - https://github.com/TanStack/router/tree/main/docs/start/framework/react
+2. **TanStack Router (v1.115+)**:
+   - Documentation: https://tanstack.com/router/latest/docs/framework/react/overview
+   - https://github.com/TanStack/router/tree/main/docs/router
 
-## Building for production
+3. **React 19**:
+   - Documentation: https://react.dev/blog/2024/12/05/react-19
+   - https://github.com/reactjs/react.dev
 
-Read the [hosting docs](https://tanstack.com/start/latest/docs/framework/react/hosting) for information on how to deploy your TanStack Start app.
+4. **React Compiler**:
+   - Documentation: https://react.dev/learn/react-compiler
 
-## Acknowledgements
+5. **Better Auth**:
+   - Documentation: https://www.better-auth.com/docs/introduction
+   - https://github.com/better-auth/better-auth/
+   - https://www.better-auth.com/llms.txt
 
-- [nekochan0122/tanstack-boilerplate](https://github.com/nekochan0122/tanstack-boilerplate) - A batteries-included TanStack Start boilerplate that inspired some patterns in this template. If you're looking for a more feature-rich starter, check it out!
-- [AlexGaudon/tanstarter-better-auth](https://github.com/AlexGaudon/tanstarter-better-auth) for his own better-auth implementation.
+6. **Drizzle ORM**:
+   - Documentation: https://orm.drizzle.team/docs/overview
+   - https://github.com/drizzle-team/drizzle-orm
+   - https://orm.drizzle.team/llms-full.txt
+
+7. **Tailwind CSS v4**:
+   - Documentation: https://tailwindcss.com/docs/installation/using-vite
+   - https://github.com/tailwindlabs/tailwindcss
+
+8. **SST (Serverless Stack)**:
+   - Documentation: https://sst.dev/docs/
+   - https://github.com/sst/sst
+
+## Getting Started with Development
+
+To begin implementation:
+1. Review the Phase 1 tickets in detail
+2. Set up your development environment following the instructions above
+3. Start with the foundation setup tickets
+
+
+https://github.com/idosal/git-mcp

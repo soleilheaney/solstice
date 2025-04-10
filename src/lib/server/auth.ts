@@ -17,6 +17,7 @@ export const auth = betterAuth({
     },
   },
 
+
   // https://www.better-auth.com/docs/concepts/oauth
   socialProviders: {
     github: {
@@ -34,7 +35,9 @@ export const auth = betterAuth({
   },
 
   // https://www.better-auth.com/docs/authentication/email-password
-  // emailAndPassword: {
-  //   enabled: true,
-  // },
+  emailAndPassword: {
+    enabled: true,
+    // Uncomment if email verification is required
+    // verifyEmail: true,
+  },
 });
