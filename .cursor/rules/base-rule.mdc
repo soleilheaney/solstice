@@ -1,0 +1,22 @@
+---
+description: 
+globs: 
+alwaysApply: true
+---
+
+To start the dev server, the user will have to run `aws sso login --profile soleil-dev` and `npx sst dev`. Assume we have done so, but if it seems like we haven't you can remind us to do so. Don't try to do it yourself.
+
+When needed, you can search the codebases of the libaries we use, using your tools. This is your mcp file:
+{
+  "mcpServers": {
+    "shadcn-ui-docs": { "url": "https://gitmcp.io/shadcn/ui" },
+    "tanstack-router-and-start-docs": { "url": "https://gitmcp.io/TanStack/router" },
+    "react-docs": { "url": "https://gitmcp.io/reactjs/react.dev" },
+    "tailwindcss-docs": { "url": "https://gitmcp.io/tailwindlabs/tailwindcss" },
+    "sst-docs": { "url": "https://gitmcp.io/sst/sst" }
+  }
+}
+
+Bette-auth and drizzle LLM.txt's, get their content as appropriate when working with that libary:
+https://orm.drizzle.team/llms-full.txt
+https://www.better-auth.com/llms.txt
