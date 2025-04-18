@@ -119,31 +119,33 @@ This project uses several cutting-edge libraries that are relatively new:
    - Documentation: https://tanstack.com/router/latest/docs/framework/react/overview
    - https://github.com/TanStack/router/tree/main/docs/router
 
-3. **React 19**:
+3. **TanStack Form**:
+   - Documentation: https://tanstack.com/form/latest/docs/overview
+   - https://github.com/TanStack/form
+
+4. **React 19**:
    - Documentation: https://react.dev/blog/2024/12/05/react-19
    - https://github.com/reactjs/react.dev
 
-4. **React Compiler**:
+5. **React Compiler**:
    - Documentation: https://react.dev/learn/react-compiler
 
-5. **Better Auth**:
+6. **Better Auth**:
    - Documentation: https://www.better-auth.com/docs/introduction
    - https://github.com/better-auth/better-auth/
    - https://www.better-auth.com/llms.txt
 
-6. **Drizzle ORM**:
+7. **Drizzle ORM**:
    - Documentation: https://orm.drizzle.team/docs/overview
    - https://github.com/drizzle-team/drizzle-orm
-   - https://orm.drizzle.team/llms-full.txt
 
-7. **Tailwind CSS v4**:
+8. **Tailwind CSS v4**:
    - Documentation: https://tailwindcss.com/docs/installation/using-vite
    - https://github.com/tailwindlabs/tailwindcss
 
-8. **SST (Serverless Stack)**:
+9. **SST (Serverless Stack)**:
    - Documentation: https://sst.dev/docs/
    - https://github.com/sst/sst
-
 
 MCP servers to use:
 ```json
@@ -153,7 +155,8 @@ MCP servers to use:
     "tanstack-router-and-start-docs": { "url": "https://gitmcp.io/TanStack/router" },
     "react-docs": { "url": "https://gitmcp.io/reactjs/react.dev" },
     "tailwindcss-docs": { "url": "https://gitmcp.io/tailwindlabs/tailwindcss" },
-    "sst-docs": { "url": "https://gitmcp.io/sst/sst" }
+    "sst-docs": { "url": "https://gitmcp.io/sst/sst" },
+    "tanstack-form": { "url": "https://github.com/TanStack/form" }
   }
 }
 ```

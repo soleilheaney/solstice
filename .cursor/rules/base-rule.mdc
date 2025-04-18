@@ -14,6 +14,7 @@ When needed, you can search the codebases of the libaries we use, using your too
     "react-docs": { "url": "https://gitmcp.io/reactjs/react.dev" },
     "tailwindcss-docs": { "url": "https://gitmcp.io/tailwindlabs/tailwindcss" },
     "sst-docs": { "url": "https://gitmcp.io/sst/sst" }
+    "tanstack-form": { "url": "https://github.com/TanStack/form" }
   }
 }
 
